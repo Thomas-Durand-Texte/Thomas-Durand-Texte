@@ -8,15 +8,24 @@
 
 ## 🔥 Highlights
 
-| Project | Impact |
-|---|---|
-| **[DL for Digital Image Correlation](https://github.com/Thomas-Durand-Texte/DL-DIC)** | ×420 speedup, -82% error, -83% resolution limit |
-| **Speech-in-noise audiometry (ML)** | ~50% exam time reduction |
-| **Thermo-vibratory imaging** | -99.5% compute time vs FEM |
+| Project                                                                                            | Impact                                          |
+|----------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| **[DL for Digital Image Correlation](https://github.com/Thomas-Durand-Texte/DIC-Neural-Networks)** | ×420 speedup, -82% error, -83% resolution limit |
+| **Speech-in-noise audiometry (ML)**                                                                | ~50% exam time reduction                        |
+| **Audiometric calibration automation**                                                             | -65% total time, -95% human time                |
+| **Thermal vibration imaging**                                                                      | Damping visualization                           |
+| **Vibration modeling**                                                                             | FEM-equivalent model at -99.5% compute          |
+
+## 📚 Training Portfolio
+
+**[Machine Learning Engineer Projects](https://github.com/Thomas-Durand-Texte/OC-formation-Ingenieur-Machine-Learning)** — Portfolio of ML projects from OpenClassrooms/CentraleSupélec training program
 
 ## 🛠️ Tech Stack
 
-`Python` `PyTorch` `scikit-learn` `NumPy` `pandas` `C/C++` `Docker` `Git` `React`
+**Languages & Frameworks:** `Python` `PyTorch` `scikit-learn` `NumPy` `pandas` `SQL` `C/C++` `React` `LaTeX` `Matlab` `Simulink`
+
+**Tools & Platforms:** `Docker` `Git` `Linux` `macOS` `Blender`
+💻 10+ years Linux & macOS experience
 
 ## 📄 Selected Publications
 
