@@ -1,6 +1,7 @@
-# Thomas Durand-Texte
-
-**Senior Applied AI Scientist** · Acoustics, Signal Processing & Computer Vision
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner_dark.png">
+  <img alt="Thomas Durand-Texte — Senior Applied AI Scientist · Acoustics · Signal Processing · Computer Vision" src="assets/banner_light.png" width="100%">
+</picture>
 
 🎓 PhD in Acoustics · MSc Electro-Acoustics · Engineer (ENSIM) · ML Engineer (CentraleSupélec/OC)
 🔬 10+ years in R&D: vibrations, 3D vision, signal processing, deep learning
