@@ -12,7 +12,7 @@
 | Project                                                                                            | Impact                                          |
 |----------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | **[DL for Digital Image Correlation](https://github.com/Thomas-Durand-Texte/DIC-Neural-Networks)** | ×420 speedup, -82% error, -83% resolution limit |
-| **[Efficient audio tagging](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)**      | 200-label tagger at 5.06M params, no AudioSet   |
+| **[Efficient audio tagging](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)**      | 200 labels from scratch, no AudioSet · [live demo](https://apcen-tagger-web.vercel.app) |
 | **Speech-in-noise audiometry (ML)**                                                                | ~50% exam time reduction                        |
 | **Audiometric calibration automation**                                                             | -65% total time, -95% human time                |
 | **[Thermo-mechanical modelling of an ABH](https://github.com/Thomas-Durand-Texte/thermo-mechanical-model)** | Where damping happens, not just how much |
@@ -20,10 +20,18 @@
 
 ## 🔊 Featured: Efficient Multi-Label Audio Tagging
 
-A learned, **physically-grounded DSP front-end** (ERB SuperGaussian filter bank + adaptive PCEN) feeding a **shared-encoder multi-head model** (peak-pool / modulation-spectrum / transformer-SED, per-class gated fusion). Trained **from scratch on FSD50K — no AudioSet pretraining**.
+> **▶ [Try it in the browser](https://apcen-tagger-web.vercel.app)** — drop in a clip and see the 200-label predictions.
 
-- **[audio-tagging-portfolio](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)** — the write-up: the front-end story, an STFT-vs-analytical-filter-bank stem comparison, and an honest per-class analysis of two model lines
+A learned, **physically-grounded DSP front-end** — an ERB SuperGaussian filter bank with an adaptive per-band AGC (APCEN) — feeding **two model lines**, both trained **from scratch on FSD50K, with no AudioSet pretraining**:
+
+- **Line 1 — shared-encoder multi-head CNN.** Peak-pool, modulation-spectrum and transformer-SED heads over one encoder, fused by a per-class gate. Four runs changing one thing at a time: **0.735 lwlrap at 5.06M parameters**, then a cached front-end and a data pipeline that manufactures the multi-event clips the labels imply — worth **+0.016 mAP on an otherwise identical model**, the largest non-architectural gain in the project.
+- **Line 2 — `bp-attn-1`, a two-scale windowed-attention pyramid.** Attention reads a whole 30 s recording instead of aggregating fixed chunks: **the project's best mAP (0.605) and macro-F1 (0.564) at ~4–6× the training throughput.** Its headline result is a diagnosis → prediction → confirmation arc — a *missing frequency prior*, identified from per-class errors on harmonic instruments and fine transients, fixed by keeping frequency a real axis through the trunk, and better on **178 of 200 classes**.
+
+Three repos:
+
+- **[audio-tagging-portfolio](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)** — the write-up: the front-end story, an STFT-vs-analytical-filter-bank stem comparison, the data-pipeline A/B, and an honest per-class analysis of both lines — including where each model *loses*
 - **[apcen-multihead-tagger](https://github.com/Thomas-Durand-Texte/apcen-multihead-tagger)** — the code + pretrained weights: infer / evaluate / fine-tune / predict, verified **bit-identical** to the research model
+- **[apcen-tagger-web](https://github.com/Thomas-Durand-Texte/apcen-tagger-web)** — the browser demo above
 
 ## 🌡️ Featured: Where Vibration Energy Is Lost, from a Thermal Video
 
