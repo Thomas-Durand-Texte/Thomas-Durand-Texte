@@ -16,6 +16,7 @@
 | **Speech-in-noise audiometry (ML)**                                                                | ~50% exam time reduction                        |
 | **Audiometric calibration automation**                                                             | -65% total time, -95% human time                |
 | **[Thermo-mechanical modelling of an ABH](https://github.com/Thomas-Durand-Texte/thermo-mechanical-model)** | Where damping happens, not just how much |
+| **[3D acoustic FDTD](https://github.com/Thomas-Durand-Texte/ac-fdtd)** | Room impulse responses validated to round-off · compiled CPU beats the GPU |
 | **Vibration modeling**                                                                             | FEM-equivalent model at -99.5% compute          |
 
 ## 🔊 Featured: Efficient Multi-Label Audio Tagging
@@ -42,6 +43,18 @@ Damping is normally characterised globally, as a modal loss factor, which says n
 - Validated against an **independent finite-element solution**, **laboratory vibrometry and infrared measurements**, and a dozen **closed-form results** that have truth values
 - Applied to **Acoustic Black Holes**, and reproducing from geometry alone what the published thermal-imaging work identifies from measurement
 - Includes the **negative results** — a hypothesis that predicted the right sign and still failed, a per-cell estimate that does not work, and a measurement that cannot identify what it was hoped to
+
+## 🏛️ Featured: Room Impulse Responses, Validated to Round-Off
+
+**[ac-fdtd](https://github.com/Thomas-Durand-Texte/ac-fdtd)** simulates the sound field in a room from the wave equation: a 3D finite-difference time-domain solver with locally reacting walls, an absorbing layer for free field, and the full **ISO 9613-1 air absorption** — then made fast enough to be useful.
+
+The interest is in what is checked and what is measured, not in the scheme, which is textbook:
+
+- **Every claim is tested against a case with an exact answer.** Energy conservation to **4.4e-16**, a single mode staying a single mode to **1.3e-13** over 3000 steps, the free-field Green's function to **0.21 %**, ISO 9613-1 attenuation to **1.2 %** across 20–80 % humidity. Where the reference is *not* exact — reverberation time against Sabine — the simulation agrees within 6–8 % above the Schroeder frequency and departs by 35 % below it, **which is the correct answer**: statistical theory does not apply there, and agreement would have meant the code was reproducing the formula instead of the physics.
+- **The compiled CPU loop beats the GPU, for a reason worth knowing.** MPS has more than twice the CPU's streaming bandwidth and loses by 20–40 %, because a step written as whole-array operations moves forty passes over memory where a fused C loop moves 48 bytes per cell. Eliminating velocity entirely is **five times faster again**. Fix the resolution, fuse the loop, then choose the device — not the order the specifications suggest.
+- **It documents the traps.** Sabine's formula wants the *random-incidence* absorption coefficient while a wall admittance is defined at normal incidence — a factor of 1.7 that made a correct solver look badly wrong. And `1.2 / 0.01` is `119.99999999999999`, which put a receiver one cell off and surfaced as a 7 % amplitude error that looked like physics.
+
+Three backends (NumPy, PyTorch on CPU/MPS/CUDA, C with pthreads) agree bitwise in double precision. 100 tests.
 
 ## 📚 Training Portfolio
 
