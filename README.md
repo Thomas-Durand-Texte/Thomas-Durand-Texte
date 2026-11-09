@@ -7,17 +7,36 @@
 🔬 10+ years in R&D: vibrations, 3D vision, signal processing, deep learning
 🏢 Currently: R&D Engineer @ iAudiogram · Previously: LAUM, ACOEM, Valéo, Harman
 
-## 🔥 Highlights
+**▶ Try it in your browser:** [Audio tagger](https://apcen-tagger-web.vercel.app) · [PyCalc](https://pycalc.vercel.app)
 
-| Project                                                                                            | Impact                                          |
-|----------------------------------------------------------------------------------------------------|-------------------------------------------------|
+## 🧠 Machine Learning
+
+| Project | Impact |
+|---|---|
 | **[DL for Digital Image Correlation](https://github.com/Thomas-Durand-Texte/DIC-Neural-Networks)** | ×420 speedup, -82% error, -83% resolution limit |
-| **[Efficient audio tagging](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)**      | 200 labels from scratch, no AudioSet · [live demo](https://apcen-tagger-web.vercel.app) |
-| **Speech-in-noise audiometry (ML)**                                                                | ~50% exam time reduction                        |
-| **Audiometric calibration automation**                                                             | -65% total time, -95% human time                |
+| **[Efficient audio tagging](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)** · [▶ demo](https://apcen-tagger-web.vercel.app) | 200 labels from scratch, no AudioSet |
+| **[ML Engineer training projects](https://github.com/Thomas-Durand-Texte/OC-formation-Ingenieur-Machine-Learning)** | OpenClassrooms/CentraleSupélec program |
+
+## 🔬 Physics & Simulation
+
+| Project | Impact |
+|---|---|
 | **[Thermo-mechanical modelling of an ABH](https://github.com/Thomas-Durand-Texte/thermo-mechanical-model)** | Where damping happens, not just how much |
 | **[3D acoustic FDTD](https://github.com/Thomas-Durand-Texte/ac-fdtd)** | Room impulse responses validated to round-off · compiled CPU beats the GPU |
-| **Vibration modeling**                                                                             | FEM-equivalent model at -99.5% compute          |
+
+## 🛠️ Apps & Demos
+
+| App | What it does |
+|---|---|
+| **[PyCalc](https://pycalc.vercel.app)** · ▶ demo | A calculator you write as a Python script: units, plots, spectrograms and filters, results beside each line |
+
+## 🏢 At Work (results only, no public code)
+
+| Project | Impact |
+|---|---|
+| **Speech-in-noise audiometry (ML)** | ~50% exam time reduction |
+| **Audiometric calibration automation** | -65% total time, -95% human time |
+| **Vibration modeling** | FEM-equivalent model at -99.5% compute |
 
 ## 🔊 Featured: Efficient Multi-Label Audio Tagging
 
@@ -28,11 +47,11 @@ A learned, **physically-grounded DSP front-end** — an ERB SuperGaussian filter
 - **Line 1 — shared-encoder multi-head CNN.** Peak-pool, modulation-spectrum and transformer-SED heads over one encoder, fused by a per-class gate. Four runs changing one thing at a time: **0.735 lwlrap at 5.06M parameters**, then a cached front-end and a data pipeline that manufactures the multi-event clips the labels imply — worth **+0.016 mAP on an otherwise identical model**, the largest non-architectural gain in the project.
 - **Line 2 — `bp-attn-1`, a two-scale windowed-attention pyramid.** Attention reads a whole 30 s recording instead of aggregating fixed chunks: **the project's best mAP (0.605) and macro-F1 (0.564) at ~4–6× the training throughput.** Its headline result is a diagnosis → prediction → confirmation arc — a *missing frequency prior*, identified from per-class errors on harmonic instruments and fine transients, fixed by keeping frequency a real axis through the trunk, and better on **178 of 200 classes**.
 
-Three repos:
+Two repos and a demo:
 
 - **[audio-tagging-portfolio](https://github.com/Thomas-Durand-Texte/audio-tagging-portfolio)** — the write-up: the front-end story, an STFT-vs-analytical-filter-bank stem comparison, the data-pipeline A/B, and an honest per-class analysis of both lines — including where each model *loses*
 - **[apcen-multihead-tagger](https://github.com/Thomas-Durand-Texte/apcen-multihead-tagger)** — the code + pretrained weights: infer / evaluate / fine-tune / predict, verified **bit-identical** to the research model
-- **[apcen-tagger-web](https://github.com/Thomas-Durand-Texte/apcen-tagger-web)** — the browser demo above
+- **[the browser demo](https://apcen-tagger-web.vercel.app)** — the model running client-side, linked above
 
 ## 🌡️ Featured: Where Vibration Energy Is Lost, from a Thermal Video
 
@@ -55,10 +74,6 @@ The interest is in what is checked and what is measured, not in the scheme, whic
 - **The resolution is the expensive decision, not the hardware.** Cost scales as the fourth power of the bandwidth resolved, so the grid is where the run time is won or lost. The scheme's dispersion relation is closed-form: ten points per wavelength buys 1.1 % phase velocity error, 1 % costs 10.5 points, and at the stability limit the scheme is **exact** along the body diagonal — which is why backing off the Courant number for safety costs 60 % more cells for the *same* accuracy.
 
 Three backends (NumPy, PyTorch on CPU/MPS/CUDA, C with pthreads) agree bitwise in double precision. 100 tests.
-
-## 📚 Training Portfolio
-
-**[Machine Learning Engineer Projects](https://github.com/Thomas-Durand-Texte/OC-formation-Ingenieur-Machine-Learning)** — Portfolio of ML projects from OpenClassrooms/CentraleSupélec training program
 
 ## 🛠️ Tech Stack
 
